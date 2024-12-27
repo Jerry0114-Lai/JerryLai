@@ -1,4 +1,4 @@
-# JerryLai
+
 #task1
 get_wiki_covid19_page <- function() {
   wiki_base_url <- "https://en.wikipedia.org/w/index.php"
@@ -29,19 +29,19 @@ preprocess_covid_data_frame <- function(data_frame) {
   
   shape <- dim(data_frame)
   
-  # Remove the World row
+ 
   data_frame<-data_frame[!(data_frame$`Country or region`=="World"),]
-  # Remove the last row
+
   data_frame <- data_frame[1:172, ]
   
-  # We dont need the Units and Ref columns, so can be removed
+  
   data_frame["Ref."] <- NULL
   data_frame["Units[b]."] <- NULL
   
-  # Renaming the columns
+
   names(data_frame) <- c("country", "date", "tested", "confirmed", "confirmed.tested.ratio", "tested.population.ratio", "confirmed.population.ratio")
   
-  # Convert column data types
+ 
   data_frame$country <- as.factor(data_frame$country)
   data_frame$date <- as.factor(data_frame$date)
   data_frame$tested <- as.numeric(gsub(",","",data_frame$tested))
